@@ -4,8 +4,9 @@ explore react best practice
 
 - javascript decorators
 
-- css in Js
-
+- css
+  - css in js
+  - css module
   - DEM
   - styled component
 
