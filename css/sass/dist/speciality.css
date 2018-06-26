@@ -15,24 +15,24 @@
   color: #000000;
 }
 
-a {
+a, #fake-links .link {
   font-weight: bold;
   text-decoration: none;
 }
-a:hover {
+a:hover, #fake-links .link:hover {
   text-decoration: underline;
 }
-body.firefox a {
+body.firefox a, body.firefox #fake-links .link, #fake-links body.firefox .link {
   font-weight: normal;
 }
 
 #main {
   color: black;
 }
-#main a {
+#main a, #main #fake-links .link, #fake-links #main .link {
   font-weight: bold;
 }
-#main a:hover {
+#main a:hover, #main #fake-links .link:hover, #fake-links #main .link:hover {
   color: red;
 }
 
@@ -57,7 +57,7 @@ body.firefox a {
 /*
 * comments
 */
-a {
+a, #fake-links .link {
   color: green;
 }
 
@@ -209,6 +209,174 @@ p {
   bottom: 10%;
   left: 10%;
   right: 10%;
+}
+
+a, #fake-links .link {
+  color: blue;
+}
+a:hover, #fake-links .link:hover {
+  text-decoration: underline;
+}
+
+#content p.notices {
+  color: blue;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+@media print {
+  .error, .seriousError, .criticalError {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+
+  .seriousError, .criticalError {
+    border-width: 3px;
+  }
+}
+/**
+* Control Directives & Expressions
+*/
+p {
+  color: green;
+}
+
+.item-1 {
+  width: 2em;
+}
+
+.item-2 {
+  width: 4em;
+}
+
+.item-3 {
+  width: 6em;
+}
+
+.item-i-1 {
+  width: 2em;
+}
+
+.item-i-2 {
+  width: 4em;
+}
+
+.puma-icon {
+  background-image: url("/images/puma.png");
+}
+
+.sea-slug-icon {
+  background-image: url("/images/sea-slug.png");
+}
+
+.egret-icon {
+  background-image: url("/images/egret.png");
+}
+
+.salamander-icon {
+  background-image: url("/images/salamander.png");
+}
+
+.puma-icon {
+  background-image: url("/images/puma.png");
+  border: 2px solid black;
+  cursor: default;
+}
+
+.sea-slug-icon {
+  background-image: url("/images/sea-slug.png");
+  border: 2px solid blue;
+  cursor: pointer;
+}
+
+.egret-icon {
+  background-image: url("/images/egret.png");
+  border: 2px solid white;
+  cursor: move;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+.item-while-6 {
+  width: 12em;
+}
+
+.item-while-4 {
+  width: 8em;
+}
+
+.item-while-2 {
+  width: 4em;
+}
+
+/**
+* Mixin Directives
+*/
+.page-title {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff0000;
+  background-color: #fc0;
+  font-size: 20px;
+  padding: 4px;
+  margin-top: 10px;
+}
+
+p {
+  border-color: blue;
+  border-width: 1in;
+  border-style: dashed;
+}
+
+h1 {
+  border-color: blue;
+  border-width: 2in;
+  border-style: dashed;
+}
+
+.shadows {
+  -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+  -webkit-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+  box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+}
+
+.primary {
+  color: #ff0000;
+  background-color: #00ff00;
+  border-color: #0000ff;
+}
+
+.secondary {
+  color: #00ff00;
+  background-color: #0000ff;
+  border-color: #ff0000;
+}
+
+* html #logo {
+  background-image: url(/logo.gif);
+}
+
+.colors {
+  background-color: red;
+  color: white;
+  border-color: red;
+}
+
+/* *
+* Function Directives */
+#sidebar {
+  width: 200px;
 }
 
 /*# sourceMappingURL=speciality.css.map */

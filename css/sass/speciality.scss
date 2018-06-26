@@ -301,3 +301,219 @@ $value: 1.5;
   left: 10%;
   right: 10%;
 }
+
+#fake-links .link {
+  @extend a;
+}
+
+a {
+  color: blue;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// @extend-Only selectors
+
+#content p%extreme {
+  color: blue;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.notices {
+  @extend %extreme;
+}
+
+a.important {
+  @extend .notice !optional;
+}
+
+// @extend in Directives
+@media print {
+  .error {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+  .seriousError {
+    @extend .error;
+    border-width: 3px;
+  }
+}
+
+/**
+* Control Directives & Expressions
+*/
+
+// @if
+$type: monster;
+p {
+  @if $type==ocean {
+    color: blue;
+  } @else if $type==matador {
+    color: red;
+  } @else if $type==monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+
+// @for
+@for $i from 1 through 3 {
+  .item-#{$i} {
+    width: 2em * $i;
+  }
+}
+
+@for $i from 1 to 3 {
+  .item-i-#{$i} {
+    width: 2em * $i;
+  }
+}
+
+// @each
+@each $animal in puma, sea-slug, egret, salamander {
+  .#{$animal}-icon {
+    background-image: url("/images/#{$animal}.png");
+  }
+}
+
+@each $animal, $color, $cursor in (puma, black, default),
+  (sea-slug, blue, pointer), (egret, white, move)
+{
+  .#{$animal}-icon {
+    background-image: url("/images/#{$animal}.png");
+    border: 2px solid $color;
+    cursor: $cursor;
+  }
+}
+
+@each $header, $size in (h1: 2em, h2: 1.5em, h3: 1.2em) {
+  #{$header} {
+    font-size: $size;
+  }
+}
+
+//@while
+$i: 6;
+@while $i > 0 {
+  .item-while-#{$i} {
+    width: 2em * $i;
+  }
+  $i: $i - 2;
+}
+
+/**
+* Mixin Directives
+*/
+
+@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+
+@mixin compound {
+  @include highlighted-background;
+  @include header-text;
+}
+
+@mixin highlighted-background {
+  background-color: #fc0;
+}
+@mixin header-text {
+  font-size: 20px;
+}
+
+.page-title {
+  @include large-text;
+  @include compound();
+  padding: 4px;
+  margin-top: 10px;
+}
+
+//Arguments ,default aiguments ,Keyword Arguments
+
+@mixin sexy-border($color, $width: 1in) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+}
+
+p {
+  @include sexy-border(blue);
+}
+
+h1 {
+  @include sexy-border($color: blue, $width: 2in);
+}
+
+// variable Arguments
+@mixin box-shadow($shadow...) {
+  -moz-box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+.shadows {
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}
+
+@mixin colors($text, $background, $border) {
+  color: $text;
+  background-color: $background;
+  border-color: $border;
+}
+
+$values: #ff0000, #00ff00, #0000ff;
+.primary {
+  @include colors($values...);
+}
+
+$value-map: (
+  text: #00ff00,
+  background: #0000ff,
+  border: #ff0000
+);
+.secondary {
+  @include colors($value-map...);
+}
+// passing content blocks to a mixin
+@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}
+// Variable Scope and Content Blocks
+$color: white;
+@mixin colorscc($color: blue) {
+  background-color: $color;
+  @content;
+  border-color: $color;
+}
+.colors {
+  @include colorscc(red) {
+    color: $color;
+  }
+}
+/* *
+* Function Directives */
+$grid-width: 40px;
+$gutter-width: 10px;
+@function grid-widths($n) {
+  @return $n * $grid-width;
+}
+#sidebar {
+  width: grid-widths($n: 5);
+}
